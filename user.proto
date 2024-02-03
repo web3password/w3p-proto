@@ -1,0 +1,1284 @@
+syntax = "proto3";
+
+option go_package = "github.com/stamhe-team/protobuf/user";
+package user;
+
+import "google/api/annotations.proto";
+
+service User {
+  // Stream
+  rpc Stream(stream StreamReq) returns (stream StreamRsp) {}
+  // User Register
+  rpc Register (RegisterReq) returns (RegisterRsp) {
+    option (google.api.http) = {
+      post: "/web3password/userRegister"
+      body: "*"
+    };
+  }
+  // get personal sign address
+  rpc GetPersonalSignAddress (GetPersonalSignAddressReq) returns (GetPersonalSignAddressRsp) {
+    option (google.api.http) = {
+      post: "/web3password/getPersonalSignAddress"
+      body: "*"
+    };
+  }
+  // get vip info
+  rpc GetVIPInfo (GetVIPInfoReq) returns (GetVIPInfoRsp) {
+    option (google.api.http) = {
+      post: "/web3password/getVipInfo"
+      body: "*"
+    };
+  }
+  // Get User Info
+  rpc GetUserInfo (GetUserInfoReq) returns (GetUserInfoRsp) {
+    option (google.api.http) = {
+      post: "/web3password/userInfo"
+      body: "*"
+    };
+  }
+  // Get block latest timestamp
+  rpc GetLatestBlockTimestamp (GetLatestBlockTimestampReq) returns(GetLatestBlockTimestampRsp) {
+    option (google.api.http) = {
+      get: "/web3password/getLatestBlockTimestamp"
+    };
+  }
+
+  // CheckTx
+  rpc CheckTx (CheckTxReq) returns(CheckTxRsp) {
+    option (google.api.http) = {
+      post: "/web3password/checkTx"
+      body: "*"
+    };
+  }
+
+  // BatchCheckTx 
+  rpc BatchCheckTx (BatchCheckTxReq) returns(BatchCheckTxRsp) {
+    option (google.api.http) = {
+      post: "/web3password/batchCheckTx"
+      body: "*"
+    };
+  }
+
+  // add/update one credential
+  rpc AddCredential (AddCredentialReq) returns(AddCredentialRsp) {
+    option (google.api.http) = {
+      post: "/web3password/addCredential"
+      body: "*"
+    };
+  }
+
+  // BatchAddCredential batch create or update credential datas
+  rpc BatchAddCredential (BatchAddCredentialReq) returns(BatchAddCredentialRsp) {
+    option (google.api.http) = {
+      post: "/web3password/batchAddCredential"
+      body: "*"
+    };
+  }
+
+  // delete one credential
+  rpc DeleteCredential (DeleteCredentialReq) returns(DeleteCredentialRsp) {
+    option (google.api.http) = {
+      post: "/web3password/deleteCredential"
+      body: "*"
+    };
+  }
+
+  // batch delete credentials
+  rpc BatchDeleteCredential (BatchDeleteCredentialReq) returns(BatchDeleteCredentialRsp) {
+    option (google.api.http) = {
+      post: "/web3password/batchDeleteCredential"
+      body: "*"
+    };
+  }
+
+  // get one credential detail
+  rpc GetCredential (GetCredentialReq) returns(GetCredentialRsp) {
+    option (google.api.http) = {
+      post: "/web3password/getCredential"
+      body: "*"
+    };
+  }
+  // delete all user credential
+  rpc DeleteAllCredential (DeleteAllCredentialReq) returns(DeleteAllCredentialRsp) {
+    option (google.api.http) = {
+      post: "/web3password/deleteAllCredential"
+      body: "*"
+    };
+  }
+  // get all credential timestamp
+  rpc GetAllCredentialTimestamp (GetAllCredentialTimestampReq) returns(GetAllCredentialTimestampRsp) {
+    option (google.api.http) = {
+      post: "/web3password/getAllCredentialTimestamp"
+      body: "*"
+    };
+  }
+  // get all credential list
+  rpc GetCredentialList (GetCredentialListReq) returns(GetCredentialListRsp) {
+    option (google.api.http) = {
+      post: "/web3password/getCredentialList"
+      body: "*"
+    };
+  }
+
+  rpc Initialize (RegisterReq) returns (RegisterRsp) {
+    option (google.api.http) = {
+      post: "/web3password/initialize"
+      body: "*"
+    };
+  }
+
+  rpc GetVersionDesc (GetVersionDescReq) returns (GetVersionDescRsp) {
+    option (google.api.http) = {
+      post: "/web3password/getVersionDesc"
+      body: "*"
+    };
+  }
+
+  rpc StorageReport (StorageReportReq) returns (StorageReportRsp){}
+
+  rpc StorageStat (StorageStatReq) returns (StorageStatRsp){}
+
+  // AdminRegister admin register
+  rpc AdminRegister (AdminRegisterReq) returns (AdminRegisterRsp);
+
+  // AdminAddMember
+  rpc AdminAddMember(AdminAddMemberReq) returns (AdminAddMemberRsp);
+
+  // AdminBatchImportMember
+  rpc AdminBatchImportMember(AdminBatchImportMemberReq) returns (AdminBatchImportMemberRsp);
+
+  // AdminUpdateMember
+  rpc AdminUpdateMember(AdminUpdateMemberReq) returns (AdminUpdateMemberRsp);
+
+  // AdminRemoveMember
+  rpc AdminRemoveMember(AdminRemoveMemberReq) returns (AdminRemoveMemberRsp);
+
+  // AdminTransferSuperAdmin
+  rpc AdminTransferSuperAdmin(AdminTransferSuperAdminReq) returns (AdminTransferSuperAdminRsp);
+
+  // AdminGetMemberList
+  rpc AdminGetMemberList(AdminGetMemberListReq) returns (AdminGetMemberListRsp);
+
+  // AdminGetOrgInfo
+  rpc AdminGetOrgInfo(AdminGetOrgInfoReq) returns (AdminGetOrgInfoRsp);
+
+  // AdminUpdateOrgInfo
+  rpc AdminUpdateOrgInfo(AdminUpdateOrgInfoReq) returns (AdminUpdateOrgInfoRsp);
+
+  // AdminOperationHistory
+  rpc AdminOperationHistory(AdminOperationHistoryReq) returns (AdminOperationHistoryRsp);
+
+  // AdminAuthorization
+  rpc AdminAuthorization(AdminAuthorizationReq) returns (AdminAuthorizationRsp);
+
+  // GetAdminMnemonic
+  rpc GetAdminMnemonic(GetAdminMnemonicReq) returns (GetAdminMnemonicRsp);
+
+  // ShareFolderCreate
+  rpc ShareFolderCreate(ShareFolderCreateReq) returns (ShareFolderCreateRsp);
+
+  // ShareFolderUpdate
+  rpc ShareFolderUpdate(ShareFolderUpdateReq) returns (ShareFolderUpdateRsp);
+
+  // ShareFolderDestroy
+  rpc ShareFolderDestroy(ShareFolderDestroyReq) returns (ShareFolderDestroyRsp);
+
+  // ShareFolderAddRecord
+  rpc ShareFolderAddRecord(ShareFolderAddRecordReq) returns (ShareFolderAddRecordRsp);
+
+  // ShareFolderDeleteRecord
+  rpc ShareFolderDeleteRecord(ShareFolderDeleteRecordReq) returns (ShareFolderDeleteRecordRsp);
+
+  // ShareFolderAddMember
+  rpc ShareFolderAddMember(ShareFolderAddMemberReq) returns (ShareFolderAddMemberRsp);
+
+  // ShareFolderUpdateMember
+  rpc ShareFolderUpdateMember(ShareFolderUpdateMemberReq) returns (ShareFolderUpdateMemberRsp);
+
+  // ShareFolderMemberExit
+  rpc ShareFolderMemberExit(ShareFolderMemberExitReq) returns (ShareFolderMemberExitRsp);
+
+  // ShareFolderDeleteMember
+  rpc ShareFolderDeleteMember(ShareFolderDeleteMemberReq) returns (ShareFolderDeleteMemberRsp);
+
+  // ShareFolderBatchUpdate
+  rpc ShareFolderBatchUpdate(ShareFolderBatchUpdateReq) returns (ShareFolderBatchUpdateRsp);
+
+  // ShareFolderFolderList
+  rpc ShareFolderFolderList(ShareFolderFolderListReq) returns (ShareFolderFolderListRsp);
+
+  // ShareFolderMemberList
+  rpc ShareFolderRecordList(ShareFolderRecordListReq) returns (ShareFolderRecordListRsp);
+
+  rpc ShareFolderRecordListByRid(ShareFolderRecordListByRidReq) returns (ShareFolderRecordListByRidRsp);
+
+  // ShareFolderMemberList
+  rpc ShareFolderMemberList(ShareFolderMemberListReq) returns (ShareFolderMemberListRsp);
+
+  rpc FileUpload(FileUploadReq) returns (FileUploadRsp);
+
+  rpc FileDownload(FileDownloadReq) returns (FileDownloadRsp);
+
+  rpc FileAttachment(FileAttachmentReq) returns (FileAttachmentRsp);
+
+  rpc FileReport(FileReportReq) returns (FileReportRsp);
+
+  rpc GetVersionConfig(GetVersionConfigReq) returns (GetVersionConfigRsp);
+
+  rpc VipGetConfig(VipGetConfigReq) returns (VipGetConfigRsp);
+
+  rpc VipSubscriptionList(VipSubscriptionListReq) returns (VipSubscriptionListRsp);
+
+  rpc VipPaymentList(VipPaymentListReq) returns (VipPaymentListRsp);
+
+  rpc VipCreateOrder(VipCreateOrderReq) returns (VipCreateOrderRsp);
+
+  rpc VipCheckOrder(VipCheckOrderReq) returns (VipCheckOrderRsp);
+
+  rpc VipAppleVerifyReceipt(VipAppleVerifyReceiptReq) returns (VipAppleVerifyReceiptRsp);
+
+  rpc GetDiscountCodeInfo(GetDiscountCodeInfoReq) returns (GetDiscountCodeInfoRsp);
+
+  rpc GetOrderList(GetOrderListReq) returns (GetOrderListRsp);
+  rpc VipIOSPromotionSign(GetVipIOSPromotionSignReq) returns (GetVipIOSPromotionSignRsp);
+
+  rpc VipPrice(VipPriceReq) returns (VipPriceRsp);
+}
+
+message EmptyData {}
+
+// Stream request
+message StreamReq {
+  string cmd = 1;
+  // for validate node
+  string token = 2;
+  string signature = 3;
+  string params = 4;
+  int64 request_id = 5;
+  bytes data = 6;
+  string trace_id = 7;
+}
+
+// Stream response
+message StreamRsp {
+  string cmd = 1;
+  // for validate node
+  string token = 2;
+  string signature = 3;
+  string params = 4;
+  int64 request_id = 5;
+  bytes data = 6;
+  string trace_id = 7;
+}
+
+message RegisterReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message RegisterRsp {
+  int32 code = 1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message GetPersonalSignAddressReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetPersonalSignAddressRsp {
+  message Data {
+    repeated Sign signs =1;
+  }
+  message Sign {
+    string sign = 1;
+    string params = 2;
+  }
+
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message GetVIPInfoReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetVIPInfoRsp {
+  message Data {
+    string signature = 1;
+    string params = 2;
+    repeated List org_info =3 [json_name = "org_info"];
+    message List {
+      string org_id = 1;
+      bytes org_name = 2;
+      bytes logo = 3;
+      bytes self_host_url = 4;
+      bytes member_share_mnemonic = 5;
+    }
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message GetUserInfoReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetUserInfoRsp {
+  message Data {
+    string addr = 1;
+    string chain_id = 2 [json_name = "chain_id"];
+    string invite_code = 3 [json_name = "invite_code"];
+    string storage_type = 4 [json_name = "storage_type"];
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message GetLatestBlockTimestampReq {}
+
+message GetLatestBlockTimestampRsp {
+  message Data {
+    int32 timestamp = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message CheckTxReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message CheckTxRsp {
+  message Data {
+    int32 is_success = 1 [json_name = "is_success"];
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message BatchCheckTxReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message BatchCheckTxRsp {
+  message Data {
+    message ListItem {
+      string hash = 1;
+      int32 success = 2;
+    }
+    repeated ListItem list = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message AddCredentialReq {
+  string signature = 1;
+  string params = 2;
+  bytes  data = 3;
+}
+
+message AddCredentialRsp {
+  message Data {
+    string tx_hash = 1 [json_name = "tx_hash"];
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message BatchAddCredentialReq {
+  string signature = 1;
+  string params = 2;
+  bytes  data = 3;
+}
+
+message BatchAddCredentialRsp {
+  message Data {
+    message ListItem {
+      string id = 1;
+      string hash = 2;
+    }
+    repeated ListItem list = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message DeleteCredentialReq {
+  string signature = 1;
+  string params = 2;
+  bytes  data = 3;
+}
+
+message DeleteCredentialRsp {
+  message Data {
+    string tx_hash = 1 [json_name = "tx_hash"];
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message BatchDeleteCredentialReq {
+  string signature = 1;
+  string params = 2;
+  bytes  data = 3;
+}
+
+message BatchDeleteCredentialRsp {
+  message Data {
+    message ListItem {
+      string id = 1;
+      string hash = 2;
+    }
+    repeated ListItem list = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message GetCredentialReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetCredentialRsp {
+  message Item {
+    string id = 1;
+    bytes credential = 2;
+    int32 op_timestamp = 3 [json_name = "op_timestamp"];
+  }
+  int32 code = 1;
+  string msg = 2;
+  Item data = 3;
+}
+
+message DeleteAllCredentialReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message DeleteAllCredentialRsp {
+  int32 code = 1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message GetAllCredentialTimestampReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetAllCredentialTimestampRsp {
+  message Item {
+    string id = 1;
+    int32 op_timestamp = 3 [json_name = "op_timestamp"];
+  }
+  int32 code = 1;
+  string msg = 2;
+  repeated Item data = 3;
+}
+
+message GetCredentialListReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetCredentialListRsp {
+  message Item {
+    string id = 1;
+    bytes credential = 2;
+    int32 op_timestamp = 3 [json_name = "op_timestamp"];
+  }
+  int32 code = 1;
+  string msg = 2;
+  repeated Item data = 3;
+}
+
+
+message GetVersionDescReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetVersionDescRsp {
+  message Data {
+    string version_desc = 1 [json_name = "version_desc"];
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message StorageReportReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message StorageReportRsp {
+  int32 code = 1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message StorageStatReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message StorageStatRsp {
+  message Data {
+    int64 total_real = 1;
+    string total_human_readable = 2;
+    int64 used = 3;
+    int64 left = 4;
+
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+// AdminRegisterReq
+message AdminRegisterReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+// AdminRegisterRsp
+message AdminRegisterRsp {
+  int32 code = 1;
+  string msg = 2;
+  message Data {
+    string org_id = 1;
+  }
+  Data data = 3;
+}
+
+// AdminAuthorizationReq
+message AdminAuthorizationReq {
+  string signature = 1;
+  string params = 2;
+}
+
+// AdminAuthorizationReq
+message AdminAuthorizationRsp {
+  message Data {
+    string authorization = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+
+message AdminAddMemberReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminAddMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message AdminBatchImportMemberReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminBatchImportMemberRsp {
+  message Data {
+    repeated List list =1;
+  }
+  message List {
+    string line = 1;
+    string tip = 2;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message AdminUpdateMemberReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminUpdateMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message AdminRemoveMemberReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminRemoveMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message AdminTransferSuperAdminReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminTransferSuperAdminRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message AdminGetMemberListReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminGetMemberListRsp {
+  message Data {
+    repeated List list =1;
+  }
+  message List {
+    string member_addr = 1;
+    bytes member_data = 2;
+    bytes admin_share_mnemonic = 3;
+    bytes member_share_mnemonic = 4;
+    string role = 5;
+    string member_sign = 6;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message AdminGetOrgInfoReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminGetOrgInfoRsp {
+  int32 code = 1;
+  string msg = 2;
+  string data = 3;
+}
+
+message AdminUpdateOrgInfoReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminUpdateOrgInfoRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message AdminOperationHistoryReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AdminOperationHistoryRsp {
+  message Item {
+    string addr = 1;
+    string action = 2;
+    string content = 3;
+    int32 op_timestamp = 4;
+  }
+  int32 code = 1;
+  string msg = 2;
+  repeated Item data = 3;
+}
+
+message GetAdminMnemonicReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message GetAdminMnemonicRsp {
+  message Data {
+    bytes admin_share_mnemonic = 1;
+    bytes member_share_mnemonic = 2;
+  }
+
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message ShareFolderCreateReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderCreateRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderUpdateReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderUpdateRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderDestroyReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderDestroyRsp {
+  int32 code = 1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderAddRecordReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderAddRecordRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderDeleteRecordReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderDeleteRecordRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderAddMemberReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderAddMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderUpdateMemberReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderUpdateMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderMemberExitReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderMemberExitRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderDeleteMemberReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderDeleteMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderFolderListReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message ShareFolderFolderListRsp {
+  message Data {
+    repeated List list =1;
+  }
+  message List {
+    string folder_id = 1;
+    bytes folder_name = 2;
+    string folder_owner = 3;
+    bytes folder_mnemonic = 4;
+    int32 timestamp = 5;
+    string folder_auth = 6;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message ShareFolderRecordListReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderRecordListRsp {
+  message Data {
+    repeated List list =1;
+  }
+  message List {
+    string folder_id = 1;
+    string record_id = 2;
+    string id = 3;
+    bytes record_data = 4;
+    string owner_addr = 5;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message ShareFolderRecordListByRidRsp {
+  message Data {
+    repeated List list =1;
+  }
+  message List {
+    string folder_id = 1;
+    string record_id = 2;
+    string id = 3;
+    bytes record_data = 4;
+    bytes folder_mnemonic = 6;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message ShareFolderRecordListByRidReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderBatchUpdateRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message ShareFolderBatchUpdateReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderMemberListReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ShareFolderMemberListRsp {
+  message Data {
+    repeated List list =1;
+  }
+  message List {
+    string member_addr = 1;
+    bytes member_name = 2;
+    string member_sign = 3;
+    string folder_id = 4;
+    bytes folder_mnemonic = 5;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message FileUploadReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message FileUploadRsp {
+  int32 code = 1;
+  string msg = 2;
+  message Data {
+    string cid = 1;
+  }
+  Data data = 3;
+}
+
+message FileDownloadReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message FileDownloadRsp {
+  int32 code = 1;
+  string msg = 2;
+  message Data {
+    string cid = 1;
+    bytes content = 2;
+  }
+  Data data = 3;
+}
+
+message FileAttachmentReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message FileAttachmentRsp {
+  int32 code = 1;
+  string msg = 2;
+  message Data {
+    bool success  = 1;
+    string message  = 2;
+    string cid = 3;
+    bytes content = 4;
+  }
+  Data data = 3;
+}
+
+
+message FileReportReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message FileReportRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message GetVersionConfigReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message GetVersionConfigRsp {
+  message Data {
+    string version_name = 1;
+    string version_value = 2;
+    int32 record_count_limit = 3;
+    int32 one_record_attachment_count_limit = 4;
+    int64 one_user_attachment_space_limit = 5;
+    int64 one_attachment_size_limit = 6;
+    int32 sharefolder_create_limit = 7;
+    int32 sharefolder_record_limit = 8;
+    int32 sharefolder_member_limit = 9;
+    int32 one_record_website_limit = 10;
+    int32 one_record_linkwebsite_limit = 11;
+    int32 version_user = 12;
+    int32 admin_member_limit = 13;
+    int64 one_record_size_limit = 14;
+    int32 show_rebate = 15;
+    string rebate_rate = 16;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message VipSubscriptionListReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message VipSubscriptionListRsp {
+  message Data {
+    message VipItem {
+      string version = 1;
+      string vip_name = 2;
+      string org_id = 3;
+      bytes org_name = 4;
+      bytes member_share_mnemonic = 5;
+      string vip_type = 6;
+      int32 renewing = 7;
+      int32 start_time = 8;
+      int32 expired_time = 9;
+      int32 active_user = 10;
+      int32 buy_time = 11;
+    }
+    repeated VipItem my_vip = 1;
+    repeated VipItem joined_vip = 2;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+
+
+message VipPaymentListReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message VipPaymentListRsp {
+  message Data {
+    string include_user = 1;
+    string share_user = 2;
+    string product_id = 3;
+    string extend = 4;
+    repeated SkuItem sku_list = 5;
+  }
+
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message PayChannelList {
+  PayChannelItems apple_pay = 1;
+  PayChannelItems google_pay = 2;
+  PayChannelItems paypal = 3;
+  PayChannelItems stripe = 4;
+}
+
+message PayChannelItems {
+  PayChannelEditionItem premium = 1;
+  PayChannelEditionItem families = 2;
+  PayChannelEditionItem teams = 3;
+  PayChannelEditionItem business = 4;
+}
+
+message PayChannelEditionItem {
+  string include_user = 1;
+  string share_user = 2;
+  string product_id = 3;
+  repeated SkuItem sku_list = 4;
+}
+
+message DescItem {
+  string icon_url = 1;
+  string content = 2;
+}
+
+message SkuItem {
+  string validity_period = 1;
+  string price_desc = 2;
+  int32  price = 3;
+  string currency = 4;
+  string recommend = 5;
+  string sku_id = 6;
+  string sku_type = 7;
+  int64  good_id = 8;
+  int32  one_month_price = 9;
+  int32  one_user_price = 10;
+  string save = 11;
+  string free_days = 12;
+  string price_type = 13;
+  string probation = 14;
+  string platform = 15;
+  int32 discount = 16;
+  string original_price = 17;
+  string original_price_show = 18;
+}
+
+message VipCreateOrderReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message VipCreateOrderRsp {
+  message Data {
+    string order_id = 1;
+    string out_order_id = 2;
+    string payment_voucher = 3;
+    string payment_redirect = 4;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+
+message VipCheckOrderReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message VipCheckOrderRsp {
+  message Data {
+    string order_status = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message VipAppleVerifyReceiptReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message VipAppleVerifyReceiptRsp {
+  message Data {
+    string order_id = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+
+message GetDiscountCodeInfoReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetDiscountCodeInfoRsp {
+  message Data {
+    int32 discount = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message VipGetConfigReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message VipGetConfigRsp {
+  message Paypal {
+     string client_id = 1;
+  }
+  message Data {
+    Paypal paypal = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message GetOrderListReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message GetOrderListRsp {
+  message Data {
+    int32 total = 1;
+    repeated OrderList list = 2;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+
+
+
+message OrderList {
+  string addr = 1;
+  string org_id = 2;
+  string order_id = 3;
+  string product_desc = 4;
+  int32 status = 5;
+  string pay_platform = 6;
+  int32 amount = 7;
+  int32  pay_time = 8;
+}
+
+message GetVipIOSPromotionSignReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+
+message GetVipIOSPromotionSignRsp {
+  message Data {
+    string signed_msg = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+
+message VipPriceReq {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message VipPriceRsp {
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+  message Data {
+    string total_amount = 1;
+    string discount_amount = 2;
+    string promotion_amount = 3;
+    string pay_amount = 4;
+    string remain_days = 5;
+  }
+}

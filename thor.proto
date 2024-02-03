@@ -1,0 +1,243 @@
+syntax = "proto3";
+
+option go_package = "github.com/stamhe-team/protobuf/thor";
+package thor;
+
+import "google/api/annotations.proto";
+
+service Thor {
+  // Stream
+  rpc Stream(stream StreamReq) returns (stream StreamRsp) {}
+  // User Register
+  rpc Register (RegisterReq) returns (RegisterRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/register"
+      body: "*"
+    };
+  }
+
+  // AddMember
+  rpc AddMember(AddMemberReq) returns (AddMemberRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/addMember"
+      body: "*"
+    };
+  }
+
+  // BatchImportMember
+  rpc BatchImportMember(BatchImportMemberReq) returns (BatchImportMemberRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/batchImportMember"
+      body: "*"
+    };
+  }
+
+  // UpdateMember
+  rpc UpdateMember(UpdateMemberReq) returns (UpdateMemberRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/updateMember"
+      body: "*"
+    };
+  }
+
+  // RemoveMember
+  rpc RemoveMember(RemoveMemberReq) returns (RemoveMemberRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/removeMember"
+      body: "*"
+    };
+  }
+
+  // TransferSuperAdmin
+  rpc TransferSuperAdmin(TransferSuperAdminReq) returns (TransferSuperAdminRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/transferSuperAdmin"
+      body: "*"
+    };
+  }
+
+  // GetMemberList
+  rpc GetMemberList(GetMemberListReq) returns (GetMemberListRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/getMemberList"
+      body: "*"
+    };
+  }
+
+  // GetOrgInfo
+  rpc GetOrgInfo(GetOrgInfoReq) returns (stream GetOrgInfoRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/getOrgInfo"
+      body: "*"
+    };
+  }
+
+  // UpdateOrgInfo
+  rpc UpdateOrgInfo(UpdateOrgInfoReq) returns (UpdateOrgInfoRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/updateOrgInfo"
+      body: "*"
+    };
+  }
+
+  // OperationHistory
+  rpc OperationHistory(OperationHistoryReq) returns (OperationHistoryRsp) {
+    option (google.api.http) = {
+      post: "/web3password/admin/operationHistory"
+      body: "*"
+    };
+  }
+
+}
+
+message EmptyData {}
+
+// Stream request
+message StreamReq {
+  string cmd = 1;
+  // for validate node
+  string token = 2;
+  string signature = 3;
+  string params = 4;
+  int64 request_id = 5;
+}
+
+// Stream response
+message StreamRsp {
+  string cmd = 1;
+  // for validate node
+  string token = 2;
+  string signature = 3;
+  string params = 4;
+  int64 request_id = 5;
+}
+
+message RegisterReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message RegisterRsp {
+  int32 code = 1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message AddMemberReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message AddMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message BatchImportMemberReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message BatchImportMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message UpdateMemberReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message UpdateMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message RemoveMemberReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message RemoveMemberRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message TransferSuperAdminReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message TransferSuperAdminRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message GetMemberListReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetMemberListRsp {
+  message Item {
+    string tag_addr = 1;
+    string encrypt_data = 2;
+  }
+  int32 code = 1;
+  string msg = 2;
+  repeated Item data = 3;
+}
+
+message GetOrgInfoReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetOrgInfoRsp {
+  message Data {
+    uint32 id = 1;
+    string name = 2;
+    string logo = 3;
+    uint32 version = 4;
+    uint32 vip_type = 5;
+    uint32 left_seats = 6;
+    uint32 seats = 7;
+    uint32 expired_time = 8;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message UpdateOrgInfoReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message UpdateOrgInfoRsp {
+  int32 code=1;
+  string msg = 2;
+  EmptyData data = 3;
+}
+
+message OperationHistoryReq {
+  string signature = 1;
+  string params = 2;
+}
+
+message OperationHistoryRsp {
+  message Item {
+    string id = 1;
+    string addr = 2;
+    string action = 3;
+    string content = 4;
+  }
+  int32 code = 1;
+  string msg = 2;
+  repeated Item data = 3;
+}

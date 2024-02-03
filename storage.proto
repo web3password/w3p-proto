@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package storage;
+option go_package = "github.com/stamhe-team/protobuf/storage";
+
+service Storage {
+
+  rpc Upload(UploadRequest) returns (UploadReply) {}
+
+  rpc Download(DownloadRequest) returns (DownloadReply) {}
+
+  rpc Attachment(AttachmentRequest) returns (AttachmentReply) {}
+
+  rpc Report(ReportRequest) returns (ReportReply) {}
+}
+
+message UploadRequest {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message UploadReply {
+  int32 code = 1;
+  string msg = 2;
+  message Data {
+    string cid = 1;
+  }
+  Data data = 3;
+}
+
+message DownloadRequest {
+  string signature = 1;
+  string params = 2;
+}
+
+message DownloadReply {
+  int32 code = 1;
+  string msg = 2;
+  message Data {
+    string cid = 1;
+    bytes content = 2;
+  }
+  Data data = 3;
+}
+
+message AttachmentRequest {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message AttachmentReply {
+  int32 code = 1;
+  string msg = 2;
+  message Data {
+    string cid = 1;
+    bytes content = 2;
+  }
+  Data data = 3;
+}
+
+message ReportRequest {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message ReportReply {
+  bool success = 1;
+}

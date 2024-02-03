@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "github.com/stamhe-team/protobuf/service_proxy";
+package service_proxy;
+
+service ServiceProxy {
+  rpc Stream(stream StreamRequest) returns (stream StreamResponse) {}
+}
+
+message StreamRequest {
+  string cmd = 1;
+  string token = 2;
+  string signature = 3;
+  string params = 4;
+  int64 request_id = 5;
+  string trace_id = 6;
+  string data = 7;
+}
+
+message StreamResponse {
+  string cmd = 1;
+  string token = 2;
+  string signature = 3;
+  string params = 4;
+  int64 request_id = 5;
+  string trace_id = 6;
+  string data = 7;
+}

@@ -1,0 +1,196 @@
+syntax = "proto3";
+
+option go_package = "github.com/stamhe-team/protobuf/user_data_index";
+package user_data_index;
+
+service UserDataIndex {
+  rpc GetPrimaryAddrIndexList (GetPrimaryAddrIndexListRequest) returns (GetPrimaryAddrIndexListResponse);
+  rpc GetPrimaryAddrIndexDetail (GetPrimaryAddrIndexDetailRequest) returns (GetPrimaryAddrIndexDetailResponse);
+  rpc GetLatestBlock (GetLatestBlockRequest) returns (GetLatestBlockResponse);
+  rpc AddOrDelCredential (AddOrDelCredentialRequest) returns (AddOrDelCredentialResponse);
+  rpc BatchAddCredential (BatchAddCredentialRequest) returns (BatchAddCredentialResponse);
+  rpc BatchDeleteCredential (BatchDeleteCredentialRequest) returns (BatchDeleteCredentialResponse);
+  rpc DelPrimaryAddrIndex (DelPrimaryAddrIndexRequest) returns (DelPrimaryAddrIndexResponse);
+  rpc GetAllCredentialTimestamp (GetAllCredentialTimestampRequest) returns (GetAllCredentialTimestampResponse);
+  rpc GetCredentialList (GetCredentialListRequest) returns (GetCredentialListResponse);
+  rpc CheckTx (CheckTxRequest) returns (CheckTxResponse);
+  rpc BatchCheckTx (BatchCheckTxRequest) returns (BatchCheckTxResponse);
+}
+
+message IndexItem {
+  string id = 1;
+  bytes credential = 2;
+  int64 op_timestamp = 3;
+}
+
+message GetPrimaryAddrIndexListRequest {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetPrimaryAddrIndexListResponse {
+  int32 code = 1;
+  string msg = 2;
+  repeated IndexItem data = 3;
+}
+
+message GetPrimaryAddrIndexDetailRequest {
+  string signature = 1;
+  string params = 2;
+
+}
+
+message GetPrimaryAddrIndexDetailResponse {
+  int32 code = 1;
+  string msg = 2;
+  IndexItem data = 3;
+}
+
+message GetLatestBlockRequest {
+  string signature = 1;
+  string params = 2;
+}
+
+message LatestBlock {
+  int64 height = 1;
+  int64 op_timestamp = 2;
+}
+
+message GetLatestBlockResponse {
+  int32 code = 1;
+  string msg = 2;
+  LatestBlock data = 3;
+}
+
+message AddOrDelCredentialRequest {
+  string signature = 1;
+  string params = 2;
+  bytes  data = 3;
+}
+
+message AddOrDelCredentialResponse {
+  int32 code = 1;
+  string msg = 2;
+  message credentialBlockData {
+    string txhash = 1;
+  }
+  credentialBlockData data = 3;
+}
+
+message BatchAddCredentialRequest {
+  string signature = 1;
+  string params = 2;
+  bytes  data = 3;
+}
+
+message BatchAddCredentialResponse {
+  message Data {
+    message ListItem {
+      string id = 1;
+      string hash = 2;
+    }
+    repeated ListItem list = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message BatchDeleteCredentialRequest {
+  string signature = 1;
+  string params = 2;
+  bytes  data = 3;
+}
+
+message BatchDeleteCredentialResponse {
+  message Data {
+    message ListItem {
+      string id = 1;
+      string hash = 2;
+    }
+    repeated ListItem list = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+message DelPrimaryAddrIndexRequest {
+  string signature = 1;
+  string params = 2;
+}
+
+message DelPrimaryAddrIndexResponse {
+  int32 code = 1;
+  string msg = 2;
+}
+
+message GetAllCredentialTimestampRequest {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetAllCredentialTimestampResponse {
+  int32 code = 1;
+  string msg = 2;
+  repeated AddrIdTimestampList data = 3;
+}
+
+message AddrIdTimestampList {
+  string id = 1;
+  int64 op_timestamp = 2;
+}
+
+message GetCredentialListRequest {
+  string signature = 1;
+  string params = 2;
+}
+
+message GetCredentialListResponse {
+  int32 code = 1;
+  string msg = 2;
+  repeated CredentialListTimestamp data = 3;
+}
+
+message CredentialListTimestamp {
+  string id = 1;
+  string credential = 2;
+  int64 op_timestamp = 3;
+}
+
+message CheckTxRequest {
+  string signature = 1;
+  string params = 2;
+}
+
+message CheckTxResponse {
+  int32 code = 1;
+  string msg = 2;
+  CheckTxResponseData data = 3;
+}
+
+message CheckTxResponseData {
+  int64 height = 1;
+  string hash = 2;
+}
+
+message BatchCheckTxRequest {
+  string signature = 1;
+  string params = 2;
+  bytes data = 3;
+}
+
+message BatchCheckTxResponse {
+  message Data {
+    message ListItem {
+      string hash = 1;
+      int32 success = 2;
+    }
+    repeated ListItem list = 1;
+  }
+  int32 code = 1;
+  string msg = 2;
+  Data data = 3;
+}
+
+
